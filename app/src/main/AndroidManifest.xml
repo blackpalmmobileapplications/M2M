@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.cjohnson.m2m"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="19" />
+    
+    <uses-permission android:name= "android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_title"
+        android:theme="@style/AppTheme" >
+        
+        
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_title"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" >
+            
+            
+            
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <service
+            android:enabled="true"
+            android:name=".MusicService"
+            android:exported="false" >
+             <intent-filter>
+                <action android:name="com.cjohnson.m2m.action.TOGGLE_PLAYBACK" />
+                <action android:name="com.cjohnson.m2m.action.PLAY" />
+                <action android:name="com.cjohnson.m2m.action.PAUSE" />
+                <action android:name="com.cjohnson.m2m.action.SKIP" />
+                <action android:name="com.cjohnson.m2m.action.REWIND" />
+                <action android:name="com.cjohnson.m2m.action.STOP" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.cjohnson.m2m.action.URL" />
+                <data android:scheme="http" />
+            </intent-filter>
+        </service>
+
+        <receiver android:name=".MusicIntentReceiver">
+            <intent-filter>
+                <action android:name="android.media.AUDIO_BECOMING_NOISY" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+</manifest>
